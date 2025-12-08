@@ -4,29 +4,181 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Controle Financeiro </title>
+
+<!-- ⭐ CSS PROFISSIONAL -->
 <style>
   *{box-sizing:border-box;font-family:Inter,Arial, sans-serif}
-  body{background:#f5f7fb;padding:24px;color:#222}
-  .container{max-width:1100px;margin:0 auto}
-  h1{font-size:28px;text-align:center;margin-bottom:18px}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
-  .card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(12,24,50,.06)}
-  label{display:block;font-size:13px;margin-top:8px;color:#555}
-  input{width:100%;padding:10px;border:1px solid #e2e6ef;border-radius:8px;margin-top:6px}
-  button{margin-top:10px;padding:10px 12px;border-radius:8px;border:0;background:#4a67ff;color:#fff;font-weight:600;cursor:pointer}
-  table{width:100%;border-collapse:collapse;margin-top:12px}
-  th,td{padding:10px;border-bottom:1px solid #eef1fb;text-align:left;font-size:14px}
-  th{background:#4a67ff;color:#fff;border-top-left-radius:8px;border-top-right-radius:8px}
-  .actions button{margin-right:6px;padding:6px 8px;border-radius:6px;border:0;cursor:pointer}
-  .btn-edit{background:#f5a623;color:#fff}
-  .btn-delete{background:#ff4d4d;color:#fff}
-  .summary{display:flex;gap:12px;margin-top:8px}
-  .summary .item{flex:1;background:#fff;padding:12px;border-radius:10px;text-align:center;box-shadow:0 6px 18px rgba(12,24,50,.04)}
-  .muted{font-size:13px;color:#666}
-  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+
+  body{
+    background:#eef1f8;
+    padding:24px;
+    color:#222;
+  }
+
+  .container{
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  h1{
+    font-size:30px;
+    text-align:center;
+    margin-bottom:22px;
+    font-weight:800;
+    color:#1f2d5a;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+
+  .card{
+    background:#fff;
+    padding:22px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.07);
+  }
+
+  .card h2{
+    margin-bottom:10px;
+    font-size:20px;
+    color:#1f2d5a;
+  }
+
+  label{
+    display:block;
+    font-size:14px;
+    margin-top:10px;
+    color:#444;
+    font-weight:600;
+  }
+
+  input{
+    width:100%;
+    padding:11px;
+    border:1px solid #d3d8e5;
+    border-radius:10px;
+    margin-top:6px;
+    background:#f8f9fc;
+    transition:.2s;
+  }
+
+  input:focus{
+    border-color:#4a67ff;
+    background:#fff;
+    outline:none;
+  }
+
+  button{
+    margin-top:14px;
+    padding:12px 14px;
+    border-radius:10px;
+    border:0;
+    background:#4a67ff;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+    width:100%;
+    font-size:15px;
+  }
+
+  button:hover{
+    background:#2f4dea;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:14px;
+    border-radius:10px;
+    overflow:hidden;
+  }
+
+  th,td{
+    padding:11px;
+    border-bottom:1px solid #eef1fb;
+    text-align:left;
+    font-size:14px;
+  }
+
+  th{
+    background:#4a67ff;
+    color:#fff;
+    font-weight:700;
+  }
+
+  .actions button{
+    margin-right:6px;
+    padding:7px 9px;
+    border-radius:6px;
+    border:0;
+    cursor:pointer;
+    font-size:13px;
+  }
+
+  .btn-edit{
+    background:#ffa825;
+    color:#fff;
+  }
+
+  .btn-edit:hover{
+    background:#e48f10;
+  }
+
+  .btn-delete{
+    background:#ff5252;
+    color:#fff;
+  }
+
+  .btn-delete:hover{
+    background:#d63b3b;
+  }
+
+  .summary{
+    display:flex;
+    gap:16px;
+    margin-top:22px;
+  }
+
+  .summary .item{
+    flex:1;
+    background:#fff;
+    padding:18px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.07);
+  }
+
+  .muted{
+    font-size:14px;
+    color:#666;
+  }
+
+  /* ⭐ AVISO DE SALDO BAIXO */
+  #avisoSaldo{
+    text-align:center;
+    color:#b00020;
+    background:#ffebee;
+    border:1px solid #ffb3bd;
+    padding:12px;
+    border-radius:10px;
+    font-weight:700;
+    margin-top:18px;
+    font-size:17px;
+    display:none;
+    box-shadow:0 5px 14px rgba(255,0,0,0.15);
+  }
+
+  @media(max-width:860px){
+    .grid{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
+
 <div class="container">
   <h1>💼 Controle Financeiro </h1>
 
@@ -88,6 +240,9 @@
       <div id="saldo" style="font-weight:700;font-size:20px">R$ 0.00</div>
     </div>
   </div>
+
+  <div id="avisoSaldo">⚠️ Cuidado! Seu saldo está acabando!</div>
+
 </div>
 
 <script>
@@ -112,42 +267,27 @@ const btnAddDespesa = document.getElementById('btnAddDespesa');
 const elTotalRendas = document.getElementById('totalRendas');
 const elTotalDespesas = document.getElementById('totalDespesas');
 const elSaldo = document.getElementById('saldo');
+const avisoSaldo = document.getElementById('avisoSaldo');
 
 /* ====== Render ====== */
 function render() {
+
   // RENDAS
   tabelaRendasBody.innerHTML = '';
   let totalR = 0;
   rendas.forEach((r, idx) => {
     const tr = document.createElement('tr');
-    const tdData = document.createElement('td'); tdData.textContent = r.data;
-    const tdNome = document.createElement('td'); tdNome.textContent = r.nome;
-    const tdValor = document.createElement('td'); tdValor.textContent = formatMoney(r.valor);
-    const tdAcoes = document.createElement('td');
-    tdAcoes.className = 'actions';
-
-    const btnEdit = document.createElement('button');
-    btnEdit.className = 'btn-edit';
-    btnEdit.textContent = '✏ Editar';
-    btnEdit.dataset.idx = idx;
-    btnEdit.addEventListener('click', () => abrirEdicaoRenda(idx));
-
-    const btnDel = document.createElement('button');
-    btnDel.className = 'btn-delete';
-    btnDel.textContent = '🗑 Excluir';
-    btnDel.dataset.idx = idx;
-    btnDel.addEventListener('click', () => excluirRenda(idx));
-
-    tdAcoes.appendChild(btnEdit);
-    tdAcoes.appendChild(btnDel);
-
-    tr.appendChild(tdData);
-    tr.appendChild(tdNome);
-    tr.appendChild(tdValor);
-    tr.appendChild(tdAcoes);
+    tr.innerHTML = `
+      <td>${r.data}</td>
+      <td>${r.nome}</td>
+      <td>${formatMoney(r.valor)}</td>
+      <td class="actions">
+        <button class="btn-edit" onclick="abrirEdicaoRenda(${idx})">✏ Editar</button>
+        <button class="btn-delete" onclick="excluirRenda(${idx})">🗑 Excluir</button>
+      </td>
+    `;
     tabelaRendasBody.appendChild(tr);
-
-    totalR += Number(r.valor) || 0;
+    totalR += Number(r.valor);
   });
 
   // DESPESAS
@@ -155,38 +295,36 @@ function render() {
   let totalD = 0;
   despesas.forEach((d, idx) => {
     const tr = document.createElement('tr');
-    const tdData = document.createElement('td'); tdData.textContent = d.data;
-    const tdDesc = document.createElement('td'); tdDesc.textContent = d.descricao;
-    const tdValor = document.createElement('td'); tdValor.textContent = formatMoney(d.valor);
-    const tdAcoes = document.createElement('td'); tdAcoes.className = 'actions';
-
-    const btnEdit = document.createElement('button');
-    btnEdit.className = 'btn-edit';
-    btnEdit.textContent = '✏ Editar';
-    btnEdit.dataset.idx = idx;
-    btnEdit.addEventListener('click', () => abrirEdicaoDespesa(idx));
-
-    const btnDel = document.createElement('button');
-    btnDel.className = 'btn-delete';
-    btnDel.textContent = '🗑 Excluir';
-    btnDel.dataset.idx = idx;
-    btnDel.addEventListener('click', () => excluirDespesa(idx));
-
-    tdAcoes.appendChild(btnEdit);
-    tdAcoes.appendChild(btnDel);
-
-    tr.appendChild(tdData);
-    tr.appendChild(tdDesc);
-    tr.appendChild(tdValor);
-    tr.appendChild(tdAcoes);
+    tr.innerHTML = `
+      <td>${d.data}</td>
+      <td>${d.descricao}</td>
+      <td>${formatMoney(d.valor)}</td>
+      <td class="actions">
+        <button class="btn-edit" onclick="abrirEdicaoDespesa(${idx})">✏ Editar</button>
+        <button class="btn-delete" onclick="excluirDespesa(${idx})">🗑 Excluir</button>
+      </td>
+    `;
     tabelaDespesasBody.appendChild(tr);
-
-    totalD += Number(d.valor) || 0;
+    totalD += Number(d.valor);
   });
 
-  elTotalRendas.textContent = 'R$ ' + totalR.toFixed(2);
-  elTotalDespesas.textContent = 'R$ ' + totalD.toFixed(2);
-  elSaldo.textContent = 'R$ ' + (totalR - totalD).toFixed(2);
+  const saldo = totalR - totalD;
+
+  elTotalRendas.textContent = formatMoney(totalR);
+  elTotalDespesas.textContent = formatMoney(totalD);
+  elSaldo.textContent = formatMoney(saldo);
+
+  /* ⭐ AVISO DE SALDO BAIXO */
+  const limite = totalR * 0.20;
+  if (saldo > 0 && saldo < limite) {
+    avisoSaldo.style.display = "block";
+    avisoSaldo.textContent = `⚠️ Atenção! Seu saldo está baixo: ${formatMoney(saldo)}`;
+  } else if (saldo <= 0) {
+    avisoSaldo.style.display = "block";
+    avisoSaldo.textContent = `❌ Você está no negativo: ${formatMoney(saldo)}`;
+  } else {
+    avisoSaldo.style.display = "none";
+  }
 
   salvar();
 }
@@ -198,65 +336,51 @@ function salvar(){
   localStorage.setItem('despesas', JSON.stringify(despesas));
 }
 
-/* ====== Ações: Adicionar ====== */
-btnAddRenda.addEventListener('click', () => {
+/* ====== Ações ====== */
+btnAddRenda.onclick = () => {
   const data = elDataRenda.value;
   const nome = elNomeRenda.value.trim();
   const valor = parseFloat(elValorRenda.value);
-  if(!data || !nome || isNaN(valor)){ return alert('Preencha data, nome e valor válidos para a renda.') }
-  rendas.push({data, nome, valor: Number(valor.toFixed(2))});
+  if(!data || !nome || isNaN(valor)) return alert('Preencha tudo corretamente!');
+  rendas.push({data, nome, valor:Number(valor.toFixed(2))});
   elDataRenda.value = ''; elNomeRenda.value = ''; elValorRenda.value = '';
   render();
-});
+};
 
-btnAddDespesa.addEventListener('click', () => {
+btnAddDespesa.onclick = () => {
   const data = elDataDesp.value;
   const descricao = elDescDesp.value.trim();
   const valor = parseFloat(elValorDesp.value);
-  if(!data || !descricao || isNaN(valor)){ return alert('Preencha data, descrição e valor válidos para a despesa.') }
-  despesas.push({data, descricao, valor: Number(valor.toFixed(2))});
+  if(!data || !descricao || isNaN(valor)) return alert('Preencha tudo corretamente!');
+  despesas.push({data, descricao, valor:Number(valor.toFixed(2))});
   elDataDesp.value = ''; elDescDesp.value = ''; elValorDesp.value = '';
   render();
-});
+};
 
-/* ====== Ações: Excluir ====== */
-function excluirRenda(idx){
-  if(!confirm('Deseja excluir esta renda?')) return;
-  rendas.splice(idx,1);
-  render();
-}
-function excluirDespesa(idx){
-  if(!confirm('Deseja excluir esta despesa?')) return;
-  despesas.splice(idx,1);
-  render();
-}
+function excluirRenda(i){ if(confirm('Excluir?')){ rendas.splice(i,1); render(); } }
+function excluirDespesa(i){ if(confirm('Excluir?')){ despesas.splice(i,1); render(); } }
 
-/* ====== Ações: Editar (abre prompts) ====== */
-function abrirEdicaoRenda(idx){
-  const r = rendas[idx];
-  const novaData = prompt('Data:', r.data);
-  if(novaData === null) return; // cancelou
-  const novoNome = prompt('Nome:', r.nome);
-  if(novoNome === null) return;
-  const novoValorStr = prompt('Valor:', r.valor);
-  if(novoValorStr === null) return;
-  const novoValor = parseFloat(novoValorStr);
-  if(!novaData || !novoNome.trim() || isNaN(novoValor)) return alert('Entrada inválida!');
-  rendas[idx] = { data: novaData, nome: novoNome.trim(), valor: Number(novoValor.toFixed(2)) };
+function abrirEdicaoRenda(i){
+  const r = rendas[i];
+  const d = prompt("Data:", r.data);
+  if(d===null) return;
+  const n = prompt("Nome:", r.nome);
+  if(n===null) return;
+  const v = parseFloat(prompt("Valor:", r.valor));
+  if(isNaN(v)) return alert("Valor inválido");
+  rendas[i] = {data:d, nome:n, valor:Number(v.toFixed(2))};
   render();
 }
 
-function abrirEdicaoDespesa(idx){
-  const d = despesas[idx];
-  const novaData = prompt('Data:', d.data);
-  if(novaData === null) return;
-  const novaDesc = prompt('Descrição:', d.descricao);
-  if(novaDesc === null) return;
-  const novoValorStr = prompt('Valor:', d.valor);
-  if(novoValorStr === null) return;
-  const novoValor = parseFloat(novoValorStr);
-  if(!novaData || !novaDesc.trim() || isNaN(novoValor)) return alert('Entrada inválida!');
-  despesas[idx] = { data: novaData, descricao: novaDesc.trim(), valor: Number(novoValor.toFixed(2)) };
+function abrirEdicaoDespesa(i){
+  const d = despesas[i];
+  const da = prompt("Data:", d.data);
+  if(da===null) return;
+  const desc = prompt("Descrição:", d.descricao);
+  if(desc===null) return;
+  const v = parseFloat(prompt("Valor:", d.valor));
+  if(isNaN(v)) return alert("Valor inválido");
+  despesas[i] = {data:da, descricao:desc, valor:Number(v.toFixed(2))};
   render();
 }
 
