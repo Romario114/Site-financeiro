@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+}
+
+body {
+  background: #f5f7fb;
+  padding: 24px;
+  color: #222;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(12, 24, 50, .06);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  margin-top: 8px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e2e6ef;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 0;
+  background: #4a67ff;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #eef1fb;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background: #4a67ff;
+  color: #fff;
+}
+
+.actions button {
+  margin-right: 6px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 0;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background: #f5a623;
+  color: #fff;
+}
+
+.btn-delete {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+.summary {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.summary .item {
+  flex: 1;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(12, 24, 50, .04);
+}
+
+.muted {
+  font-size: 13px;
+  color: #666;
+}
+
+.valorResumo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
