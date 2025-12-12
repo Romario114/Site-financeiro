@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Dívidas de Longo Prazo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dividas.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> Controle de Dívidas de Longo Prazo</h1>
+            <p class="subtitle">Gerencie consórcios, empréstimos e financiamentos</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Painel de Cadastro -->
+            <div class="card cadastro-card">
+                <h2><i class="fas fa-plus-circle"></i> Cadastrar Nova Dívida</h2>
+                <form id="formDivida">
+                    <div class="form-group">
+                        <label for="nomeDivida">Nome da Dívida *</label>
+                        <input type="text" id="nomeDivida" placeholder="Ex: Consórcio Carro, Empréstimo Pessoal" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="valorTotal">Valor Total (R$) *</label>
+                            <input type="number" id="valorTotal" min="0" step="0.01" placeholder="Ex: 25000.00" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="parcelasTotal">Total de Parcelas *</label>
+                            <input type="number" id="parcelasTotal" min="1" placeholder="Ex: 60" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tipoDivida">Tipo de Dívida</label>
+                            <select id="tipoDivida">
+                                <option value="consorcio">Consórcio</option>
+                                <option value="emprestimo">Empréstimo</option>
+                                <option value="financiamento">Financiamento</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dataInicio">Data de Início</label>
+                            <input type="date" id="dataInicio">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descricao">Descrição (opcional)</label>
+                        <textarea id="descricao" rows="3" placeholder="Observações sobre esta dívida..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Salvar Dívida
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="btnCancelar">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Lista de Dívidas -->
+            <div class="card">
+                <h2><i class="fas fa-list"></i> Minhas Dívidas</h2>
+                <div class="search-filter">
+                    <input type="text" id="searchInput" placeholder="Buscar por nome...">
+                    <select id="filterStatus">
+                        <option value="todos">Todas</option>
+                        <option value="ativas">Ativas</option>
+                        <option value="quitadas">Quitadas</option>
+                    </select>
+                </div>
+                
+                <div id="listaDividas">
+                    <!-- As dívidas serão carregadas aqui via JavaScript -->
+                    <div class="empty-state">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <p>Nenhuma dívida cadastrada ainda.</p>
+                        <p>Comece cadastrando uma nova dívida.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumo -->
+        <div class="summary">
+            <div class="summary-item">
+                <div class="summary-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="summary-info">
+                    <span class="summary-label">Total de Dívidas</span>
+                    <span class="summary-value" id="totalDividas">0</span>
+                </div>
+            </div>
+            
+            <div class="summary-item">
+                <div class="summary-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="summary-info">
+                    <span class="summary-label">Valor Total</span>
+                    <span class="summary-value" id="valorTotalDividas">R$ 0,00</span>
+                </div>
+            </div>
+            
+            <div class="summary-item">
+                <div class="summary-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="summary-info">
+                    <span class="summary-label">Quitadas</span>
+                    <span class="summary-value" id="dividasQuitadas">0</span>
+                </div>
+            </div>
+            
+            <div class="summary-item">
+                <div class="summary-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <div class="summary-info">
+                    <span class="summary-label">Progresso Médio</span>
+                    <span class="summary-value" id="progressoMedio">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Dívida -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Editar Dívida</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <!-- Conteúdo será preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+ <!-- Botão de Navegação -->
+    <div class="navigation-buttons">
+        <a href="../controle/index.html" class="nav-btn">
+            <i class="fas fa-exchange-alt"></i> Ir para Controle Financeiro
+        </a>
+    </div>
+
+    <script src="dividas.js"></script>
+</body>
+</html>
