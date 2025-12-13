@@ -1,0 +1,213 @@
+*{box-sizing:border-box;font-family:Inter,Arial, sans-serif}
+
+body{
+  background:#eef1f8;
+  padding:24px;
+  color:#222;
+}
+
+.container{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+h1{
+  font-size:30px;
+  text-align:center;
+  margin-bottom:22px;
+  font-weight:800;
+  color:#1f2d5a;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.07);
+}
+
+.card h2{
+  margin-bottom:10px;
+  font-size:20px;
+  color:#1f2d5a;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  margin-top:10px;
+  color:#444;
+  font-weight:600;
+}
+
+input{
+  width:100%;
+  padding:11px;
+  border:1px solid #d3d8e5;
+  border-radius:10px;
+  margin-top:6px;
+  background:#f8f9fc;
+  transition:.2s;
+}
+
+input:focus{
+  border-color:#4a67ff;
+  background:#fff;
+  outline:none;
+}
+
+button{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:10px;
+  border:0;
+  background:#4a67ff;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+  width:100%;
+  font-size:15px;
+}
+
+button:hover{
+  background:#2f4dea;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:14px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+th,td{
+  padding:11px;
+  border-bottom:1px solid #eef1fb;
+  text-align:left;
+  font-size:14px;
+}
+
+th{
+  background:#4a67ff;
+  color:#fff;
+  font-weight:700;
+}
+
+.actions button{
+  margin-right:6px;
+  padding:7px 9px;
+  border-radius:6px;
+  border:0;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.btn-edit{
+  background:#ffa825;
+  color:#fff;
+}
+
+.btn-edit:hover{
+  background:#e48f10;
+}
+
+.btn-delete{
+  background:#ff5252;
+  color:#fff;
+}
+
+.btn-delete:hover{
+  background:#d63b3b;
+}
+
+.summary{
+  display:flex;
+  gap:16px;
+  margin-top:22px;
+}
+
+.summary .item{
+  flex:1;
+  background:#fff;
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.07);
+}
+
+.muted{
+  font-size:14px;
+  color:#666;
+}
+
+/* ⭐ AVISO DE SALDO BAIXO */
+#avisoSaldo{
+  text-align:center;
+  color:#b00020;
+  background:#ffebee;
+  border:1px solid #ffb3bd;
+  padding:12px;
+  border-radius:10px;
+  font-weight:700;
+  margin-top:18px;
+  font-size:17px;
+  display:none;
+  box-shadow:0 5px 14px rgba(255,0,0,0.15);
+}
+
+@media(max-width:860px){
+  .grid{grid-template-columns:1fr}
+}
+
+/* Botões de Navegação */
+.navigation-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #4a67ff, #2ecc71);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(74, 103, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(74, 103, 255, 0.4);
+    background: linear-gradient(135deg, #2f4dea, #27ae60);
+}
+
+.nav-btn i {
+    font-size: 18px;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+    .navigation-buttons {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .nav-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
